@@ -32,18 +32,24 @@ class TodoViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("👍\(#function)")
         self.tableView.dataSource = self
         self.tableView.delegate = self
 
         do {
             self.todoList = try RealmTodoList.init()
-            self.todoListObjects = self.todoList?.getAll() ?? []
             self.tableView.dataSource = self
         } catch let e {
             print("😭", e)
         }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        print("👍\(#function)")
+        self.todoListObjects = self.todoList?.getAll() ?? []
+        self.tableView.reloadData()
+    }
 
     @IBAction func priorityFilter_selected(_ sender: UISegmentedControl) {
         print("👍\(#function)")

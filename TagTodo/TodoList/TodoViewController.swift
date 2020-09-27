@@ -53,6 +53,15 @@ class TodoViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     @IBAction func priorityFilter_selected(_ sender: UISegmentedControl) {
         print("👍\(#function)")
+        let index = sender.selectedSegmentIndex - 1
+        
+        guard let priority = Priority.init(rawValue: index) else {
+            self.todoListObjects = self.todoList?.getAll() ?? []
+            self.tableView.reloadData()
+            return
+        }
+        self.todoListObjects = self.todoList?.getAll(priority: priority) ?? []
+        self.tableView.reloadData()
     }
 
 }

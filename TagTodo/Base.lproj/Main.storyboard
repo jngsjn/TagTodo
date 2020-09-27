@@ -25,7 +25,7 @@
                                     <segment title="High"/>
                                 </segments>
                                 <connections>
-                                    <action selector="priorityFilterselected:" destination="BYZ-38-t0r" eventType="valueChanged" id="TC7-Ah-DHi"/>
+                                    <action selector="priorityFilter_selected:" destination="BYZ-38-t0r" eventType="valueChanged" id="m96-dn-TcF"/>
                                 </connections>
                             </segmentedControl>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="OFP-ZF-PRb">

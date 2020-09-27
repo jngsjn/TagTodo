@@ -10,11 +10,16 @@ import UIKit
 class TodoViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return self.todoListObjects.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let todo = self.todoListObjects[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "todoCell", for: indexPath) as! TodoTableViewCell
+        
+        cell.todoTitleLabel.text = todo.title
+        cell.todoTagLabel.text = todo.tag
+        cell.todoPriorityView.backgroundColor = Priority.init(rawValue: todo.priority)?.color()
         
         return cell
     }
@@ -22,12 +27,21 @@ class TodoViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     @IBOutlet weak var tableView: UITableView!
     
+    var todoList: RealmTodoList?
+    var todoListObjects: [Todo] = []
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.tableView.dataSource = self
         self.tableView.delegate = self
 
-        // Do any additional setup after loading the view.
+        do {
+            self.todoList = try RealmTodoList.init()
+            self.todoListObjects = self.todoList?.getAll() ?? []
+            self.tableView.dataSource = self
+        } catch let e {
+            print("😭", e)
+        }
     }
     
 

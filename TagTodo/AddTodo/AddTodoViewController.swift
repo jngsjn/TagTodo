@@ -30,6 +30,7 @@ class AddTodoViewController: UIViewController {
             
             button.backgroundColor = priority.color()
             button.layer.cornerRadius = button.frame.width/2
+            button.alpha = 0.5
         }
     }
     
@@ -78,6 +79,13 @@ class AddTodoViewController: UIViewController {
         }
         
         self.selectedPriority = priority
+        for button in self.priorityButtons {
+            if (button==sender) {
+                button.alpha = 1
+            } else {
+                button.alpha = 0.5
+            }
+        }
         print("👍\(#function) \(selectedButton) \(priority)")
     }
 
